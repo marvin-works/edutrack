@@ -1,0 +1,17 @@
+/* EduTrack — academic goals */
+/* ---------- goals ---------- */
+const GT={cgpa:'Reach CGPA',gpa:'Maintain semester GPA',credits:'Complete credit units',manual:'Custom (manual progress)'};
+function goalPct(g,st){const t=+g.target;if(g.type=='manual')return+g.progress||0;const v=g.type=='cgpa'?st.cgpa:g.type=='gpa'?(st.sems.at(-1)?.gpa||0):st.tu;return t>0?v/t*100:0}
+function goalList(st){const a=D().goals,today=new Date().toISOString().slice(0,10);return a.length?a.map(g=>{const p=Math.max(0,Math.min(100,g.done?100:goalPct(g,st))),od=g.deadline&&!g.done&&g.deadline<today,s=g.done?'Completed':p>=100?'Target met':od?'Overdue':'In progress',cur=g.type=='cgpa'?`${f2(st.cgpa)} / ${g.target}`:g.type=='gpa'?`${f2(st.sems.at(-1)?.gpa||0)} / ${g.target}`:g.type=='credits'?`${st.tu} / ${g.target}`:`${g.progress}%`;
+return`<div class=card style="margin-bottom:12px"><div class=lbl>${GT[g.type]} · ${s}</div><h3 style="margin:6px 0">${esc(g.title)}</h3><p class=mut>${esc(g.desc)}</p><div class=row><span>${cur}</span><span>${f2(p)}%</span></div>${bar(p)}${g.deadline?`<p class=lbl style="margin-top:8px">Deadline ${g.deadline}</p>`:''}<div class=acts><button class=btn data-a=gedit data-v=${g.id}>Edit</button><button class=btn data-a=gdone data-v=${g.id}>${g.done?'Reopen':'Mark completed'}</button><button class="btn d" data-a=gdel data-v=${g.id}>Delete</button></div></div>`}).join(''):'<div class="card empty">No goals yet. Add your first goal above.</div>'}
+function goalsPage(){const g=gd?D().goals.find(x=>x.id==gd):null,v=g||{type:'cgpa'};return shell('goals','Goals',`<form class=card onsubmit="return gSave(event)"><h2>${g?'Edit goal':'New goal'}</h2><div class=grid style="margin-top:12px">${fld(['title','Title',v.title||''])}<div><div class=lbl>Type</div><select name=type>${Object.entries(GT).map(([k,n])=>`<option value=${k} ${k==v.type?'selected':''}>${n}</option>`).join('')}</select></div>${fld(['target','Target value (not needed for custom)',v.target??''],'type=number step=any')}${fld(['deadline','Deadline',v.deadline||''],'type=date')}${fld(['progress','Custom progress (%)',v.progress??0],'type=number min=0 max=100')}${fld(['desc','Description',v.desc||''])}</div><p class=err id=e></p><div class=acts style="margin-top:0"><button class="btn p">${g?'Update':'Add'} goal</button>${g?'<button type=button class=btn data-a=gcancel>Cancel</button>':''}</div></form><div style="margin-top:20px">${goalList(stats())}</div>`)}
+function gSave(ev){ev.preventDefault();const v=Object.fromEntries(new FormData(ev.target)),mx=+me().scale;let m='';
+if(!v.title.trim())m='Please enter a goal title.';else if(v.type!='manual'&&!(+v.target>0))m='Target value must be greater than 0.';else if((v.type=='cgpa'||v.type=='gpa')&&+v.target>mx)m='Target cannot exceed the maximum grading scale.';else if(v.type=='manual'&&(+v.progress<0||+v.progress>100))m='Progress must be between 0 and 100.';
+if(m){$('#e').textContent=m;return false}
+const a=D().goals,old=a.find(x=>x.id==gd),g={id:old?.id||Date.now(),done:old?.done||false,title:v.title.trim(),desc:v.desc.trim(),type:v.type,target:v.type=='manual'?'':+v.target,deadline:v.deadline,progress:+v.progress||0};
+old?a[a.indexOf(old)]=g:a.push(g);gd=null;save();toast('Goal saved.');route();return false}
+
+Object.assign(acts,{gedit(id){gd=id;route();scrollTo(0,0)},gcancel(){gd=null;route()},
+gdone(id){const g=D().goals.find(x=>x.id==id);g.done=!g.done;save();route()},
+gdel(id){if(confirm('Delete this goal?')){D().goals=D().goals.filter(x=>x.id!=id);save();route()}}});
+V.goals=goalsPage;
