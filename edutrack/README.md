@@ -9,14 +9,17 @@ No build step and no dependencies. The only external request is the Google Fonts
 
 ## Structure
 ```
-index.html  login.html  signup.html      public pages
-dashboard.html  gpa.html  performance.html  reach.html  goals.html  profile.html   protected pages
+index.html login.html signup.html      public pages: plain static HTML (all markup is in the file)
+dashboard.html gpa.html performance.html reach.html goals.html profile.html
+                                       protected pages: real sidebar, heading and footer in the HTML;
+                                       the <div id="content"> is filled by that page's JS with your saved data
 css/style.css        theme and responsive layout
-js/app.js            core: storage, session, GPA/CGPA maths, insights, SVG chart, sidebar shell, router (every page)
-js/auth.js           landing, signup, login, sample data
-js/dashboard.js  js/gpa.js  js/performance.js  js/reach.js  js/goals.js  js/profile.js    one file per page
+js/app.js            core: storage, session, GPA/CGPA maths, insights, SVG chart, click handling, redirect guard
+js/auth.js           signup and login behaviour
+js/sample-data.js    OPTIONAL demo semesters offered after signup (brief section 16); safe to delete
+js/dashboard.js gpa.js performance.js reach.js goals.js profile.js    one file per page
 ```
-Each page loads `app.js` plus its own module, sets `window.PAGE`, and calls `route()`, which redirects logged-out users to login and logged-in users away from login/signup.
+Each page loads `app.js` plus its own module, sets `window.PAGE`, and calls `route()`, which redirects logged-out users to login and logged-in users away from login/signup, then lets the page's module fill `#content`.
 
 ## Data (LocalStorage key `edutrack_db`)
 `users` (profile + salted SHA-256 password hash) and `data[email]` = `{ sems: [...], goals: [...] }`, so accounts never share data. The session is `edutrack_session`. Semester GPA, units and quality points are computed from the stored courses, never stored, so edits and deletes always recalculate everything.

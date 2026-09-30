@@ -1,16 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>EduTrack — Understand your performance. Plan your progress.</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>EduTrack — Understand your performance. Plan your progress.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="app"></div>
-<script src="js/app.js"></script>
-<script src="js/auth.js"></script>
-<script>window.PAGE='index';route();</script>
+  <div class="top"><a class="logo" style="margin:0" href="index.html">EDU TRACK</a>
+    <div><a class="l" href="login.html">Login</a><a class="l" href="signup.html">Sign up</a></div>
+  </div>
+  <div class="hero">
+    <div class="lbl">EduTrack</div>
+    <h1>Take Control of Your Academic Performance.</h1>
+    <p>Calculate your GPA, understand your academic trends, and know exactly what you need to reach your CGPA
+      goals.</p><a class="btn p" href="signup.html">Get Started</a> <a class="btn" href="login.html">Login</a>
+    <p class="lbl" style="margin-top:22px">Understand your performance. Plan your progress.</p>
+  </div>
+  <div class="sec">
+    <div class="grid">
+      <div class="card">
+        <h3>GPA &amp; CGPA Tracking</h3>
+        <p class="mut" style="margin-top:8px">Weighted by credit units, exactly as universities compute it.</p>
+      </div>
+      <div class="card">
+        <h3>Academic Analytics</h3>
+        <p class="mut" style="margin-top:8px">Grade distribution, strongest and weakest courses.</p>
+      </div>
+      <div class="card">
+        <h3>Goal Planning</h3>
+        <p class="mut" style="margin-top:8px">Set targets and watch progress update from your real records.</p>
+      </div>
+      <div class="card">
+        <h3>Performance Insights</h3>
+        <p class="mut" style="margin-top:8px">Rule-based observations from your own numbers.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <h2>How it works</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="step">01</div>
+        <p style="margin-top:6px">Add your academic records</p>
+      </div>
+      <div class="card">
+        <div class="step">02</div>
+        <p style="margin-top:6px">Understand your performance</p>
+      </div>
+      <div class="card">
+        <div class="step">03</div>
+        <p style="margin-top:6px">Set your target</p>
+      </div>
+      <div class="card">
+        <div class="step">04</div>
+        <p style="margin-top:6px">See what you need to achieve it</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <footer>EduTrack is an academic planning and analytics tool designed to help students understand their
+      academic performance and make informed study decisions. It is not affiliated with any university and does
+      not guarantee academic improvement.</footer>
+  </div>
+  <script src="js/app.js"></script>
+  <script>window.PAGE='index'; route();</script>
 </body>
 </html>

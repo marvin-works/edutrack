@@ -1,16 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>EduTrack — Sign up</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>EduTrack — Sign up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="app"></div>
-<script src="js/app.js"></script>
-<script src="js/auth.js"></script>
-<script>window.PAGE='signup';route();</script>
+  <div class="auth"><a class="logo" href="index.html">EDU TRACK</a>
+    <form class="card" id="f" onsubmit="return suSubmit(event)">
+      <h2>Create account</h2>
+      <div class="grid">
+        <div>
+          <div class="lbl">Full name</div><input name="name" value="">
+        </div>
+        <div>
+          <div class="lbl">Email</div><input name="email" type="email" value="">
+        </div>
+        <div>
+          <div class="lbl">Password (8+ characters)</div><input name="password" type="password" value="">
+        </div>
+        <div>
+          <div class="lbl">Confirm password</div><input name="confirm" type="password" value="">
+        </div>
+        <div>
+          <div class="lbl">University</div><input name="univ" value="">
+        </div>
+        <div>
+          <div class="lbl">Department</div><input name="dept" value="">
+        </div>
+        <div>
+          <div class="lbl">Level</div><select name="level">
+            <option>100 Level</option>,<option>200 Level</option>,<option>300 Level</option>,<option>400 Level
+            </option>,<option>500 Level</option>,<option>600 Level</option>
+          </select>
+        </div>
+        <div>
+          <div class="lbl">Grading scale</div><select name="scale">
+            <option value="5">5.0 Scale</option>
+            <option value="4">4.0 Scale</option>
+          </select>
+        </div>
+      </div>
+      <p class="err" id="e"></p><button class="btn p">Create account</button>
+      <p class="note">Have an account? <a href="login.html">Login</a></p>
+    </form>
+    <p class="note">Demo notice: accounts are stored in this browser's LocalStorage (passwords are salted and
+      hashed). This is for demonstration only and is NOT production-grade security.</p>
+  </div>
+  <script src="js/app.js"></script>
+  <script src="js/sample-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script>window.PAGE='signup'; route();</script>
 </body>
 </html>

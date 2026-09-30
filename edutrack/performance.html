@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>EduTrack — Performance</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>EduTrack — Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="app"></div>
-<script src="js/app.js"></script>
-<script src="js/performance.js"></script>
-<script>window.PAGE='performance';route();</script>
+  <div class="app">
+    <!-- Sidebar (bottom bar on phones). Same on every page; "on" marks the current page. -->
+    <aside>
+      <a class="logo" href="dashboard.html">EDU<br>TRACK</a>
+      <nav>
+        <a class="nv" href="dashboard.html"><span class="f">Dashboard</span><span class="s">Home</span></a>
+        <a class="nv" href="gpa.html"><span class="f">GPA Calculator</span><span class="s">GPA</span></a>
+        <a class="nv on" href="performance.html"><span class="f">Performance</span><span class="s">Stats</span></a>
+        <a class="nv" href="reach.html"><span class="f">Reach My Goal</span><span class="s">Reach</span></a>
+        <a class="nv" href="goals.html"><span class="f">Goals</span><span class="s">Goals</span></a>
+        <a class="nv" href="profile.html"><span class="f">Profile</span><span class="s">Me</span></a>
+        <a class="nv" href="login.html" data-a="out"><span class="f">Logout</span><span class="s">Exit</span></a>
+      </nav>
+    </aside>
+    <main>
+      <h1 id="page-title">Performance</h1>
+      <!-- js/performance.js fills this with your saved data -->
+      <div id="content"></div>
+      <footer>EduTrack is an academic planning and analytics tool designed to help students understand their academic performance and make informed study decisions. It is not affiliated with any university and does not guarantee academic improvement.</footer>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+  <script src="js/performance.js"></script>
+  <script>window.PAGE='performance'; route();</script>
 </body>
 </html>
